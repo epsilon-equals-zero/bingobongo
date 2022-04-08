@@ -1,11 +1,14 @@
 import React from "react";
 
-import { BingoApp } from "src/components/app/BingoApp";
+import { BingoLandingPage } from "src/components/index/BingoLandingPage";
+import withLayout, { NO_LAYOUT } from "src/lib/helpers/layout";
 
-export default function Index() {
+function Index() {
     return (
         <>
-            <BingoApp />
+            <BingoLandingPage />
         </>
     );
 }
+
+export default withLayout(NO_LAYOUT, Index)

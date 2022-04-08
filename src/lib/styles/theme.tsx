@@ -7,7 +7,12 @@ export function getTheme(mode: PaletteMode): Theme {
     return createTheme({
         palette: {
             mode,
-            // https://material.io/resources/color/
+            primary: {
+                main: "#20bf55"
+            },
+            secondary: {
+                main: "#0b4f6c"
+            }
         },
     });
 }
