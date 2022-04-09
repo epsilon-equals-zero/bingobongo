@@ -2,6 +2,7 @@ import { Button, Card, CardContent, Divider, TextField, Typography } from "@mui/
 import getConfig from "next/config";
 
 import { classNames } from "src/lib/helpers/classnames";
+import { AuthBox } from "../auth/AuthBox";
 
 import styles from "./BingoLandingPage.module.css";
 
@@ -12,6 +13,7 @@ export function BingoLandingPage() {
         <div className={classNames(styles.wrapper, styles.gradient135)}>
             <div className={styles.upperBall}></div>
             <div className={styles.lowerBall}></div>
+            <AuthBox sx={{position: "absolute", top: "15px", right: {xs: "5vw", sm: "15px"}}} />
 
             <Card className={styles.card}>
                 <CardContent className={styles.cardContent}>

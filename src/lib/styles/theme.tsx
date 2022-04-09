@@ -1,10 +1,10 @@
 import { ThemeProvider as MuiThemeProvider } from "@emotion/react";
 import { GlobalStyles, PaletteMode, Theme } from "@mui/material";
-import { createTheme } from "@mui/material/styles";
+import { createTheme, responsiveFontSizes } from "@mui/material/styles";
 import { useMemo } from "react";
 
 export function getTheme(mode: PaletteMode): Theme {
-    return createTheme({
+    let theme = createTheme({
         palette: {
             mode,
             primary: {
@@ -15,6 +15,8 @@ export function getTheme(mode: PaletteMode): Theme {
             },
         },
     });
+    theme = responsiveFontSizes(theme);
+    return theme;
 }
 
 export function ThemeProvider({ children }: React.PropsWithChildren<unknown>) {
