@@ -8,11 +8,11 @@ export function getTheme(mode: PaletteMode): Theme {
         palette: {
             mode,
             primary: {
-                main: "#20bf55"
+                main: "#20bf55",
             },
             secondary: {
-                main: "#0b4f6c"
-            }
+                main: "#0b4f6c",
+            },
         },
     });
 }

@@ -1,7 +1,8 @@
 import { Stack, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import getConfig from "next/config";
-import Image from "next/image";
+
+// import Image from "next/image";
 
 const { publicRuntimeConfig: config } = getConfig();
 

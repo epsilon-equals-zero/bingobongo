@@ -3,11 +3,12 @@ import type { EmotionCache } from "@emotion/utils";
 import { CssBaseline } from "@mui/material";
 import type { AppProps } from "next/app";
 import React from "react";
-import "./App.css" 
 
 import { ComponentTypeWithLayout, DEFAULT_LAYOUT } from "src/lib/helpers/layout";
 import createEmotionCache from "src/lib/styles/createEmotionCache";
 import { ThemeProvider } from "src/lib/styles/theme";
+
+import "./App.css";
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -20,7 +21,7 @@ export default function MyApp({
     emotionCache = clientSideEmotionCache,
     pageProps,
 }: MyAppProps): React.ReactElement {
-    const Layout = (Component as ComponentTypeWithLayout<React.PropsWithChildren<unknown>>)._layout || DEFAULT_LAYOUT
+    const Layout = (Component as ComponentTypeWithLayout<React.PropsWithChildren<unknown>>)._layout || DEFAULT_LAYOUT;
 
     return (
         <CacheProvider value={emotionCache}>

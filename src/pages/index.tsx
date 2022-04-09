@@ -11,4 +11,4 @@ function Index() {
     );
 }
 
-export default withLayout(NO_LAYOUT, Index)
+export default withLayout(NO_LAYOUT, Index);
