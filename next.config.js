@@ -6,7 +6,7 @@ module.exports = {
     reactStrictMode: true,
     publicRuntimeConfig: {
         version,
-        title: "bingo-builder",
+        title: "bingobongo",
         description: "",
         githubUrl: "https://github.com/yiliansource/bingo-builder",
     },
