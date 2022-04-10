@@ -6,7 +6,7 @@ import { Footer } from "./Footer";
 import { Header } from "./Header";
 
 export interface LayoutProps {
-    showAuthBox?: boolean
+    showAuthBox?: boolean;
 }
 
 /**

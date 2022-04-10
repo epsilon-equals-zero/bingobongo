@@ -3,8 +3,8 @@ import type { EmotionCache } from "@emotion/utils";
 import { CssBaseline } from "@mui/material";
 import type { AppProps } from "next/app";
 import React from "react";
-import { AuthProvider } from "src/lib/firebase/hooks/useAuth";
 
+import { AuthProvider } from "src/lib/firebase/hooks/useAuth";
 import { ComponentTypeWithLayout, DEFAULT_LAYOUT } from "src/lib/helpers/layout";
 import createEmotionCache from "src/lib/styles/createEmotionCache";
 import { ThemeProvider } from "src/lib/styles/theme";

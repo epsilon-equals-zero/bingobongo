@@ -2,11 +2,13 @@ import React, { ComponentType, PropsWithChildren } from "react";
 
 import { Layout } from "src/components/layout/Layout";
 
-export const DEFAULT_LAYOUT: ComponentType<PropsWithChildren<unknown>> = 
-    ({children}: PropsWithChildren<unknown>) => <Layout showAuthBox={true}>{children}</Layout>;
+export const DEFAULT_LAYOUT: ComponentType<PropsWithChildren<unknown>> = ({ children }: PropsWithChildren<unknown>) => (
+    <Layout showAuthBox={true}>{children}</Layout>
+);
 
-export const LAYOUT_WITHOUT_AUTHBOX: ComponentType<PropsWithChildren<unknown>> = 
-    ({children}: PropsWithChildren<unknown>) => <Layout showAuthBox={false}>{children}</Layout>;
+export const LAYOUT_WITHOUT_AUTHBOX: ComponentType<PropsWithChildren<unknown>> = ({
+    children,
+}: PropsWithChildren<unknown>) => <Layout showAuthBox={false}>{children}</Layout>;
 export const NO_LAYOUT = ({ children }: PropsWithChildren<unknown>) => <>{children}</>;
 
 export type ComponentTypeWithLayout<P> = ComponentType<P> & {

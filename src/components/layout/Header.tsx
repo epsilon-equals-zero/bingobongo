@@ -1,12 +1,13 @@
 import { Stack, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import getConfig from "next/config";
+
 import { AuthBox } from "../auth/AuthBox";
 
 // import Image from "next/image";
 
 export interface HeaderProps {
-    showAuthBox: boolean
+    showAuthBox: boolean;
 }
 
 const { publicRuntimeConfig: config } = getConfig();
