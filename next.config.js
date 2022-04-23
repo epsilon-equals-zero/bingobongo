@@ -8,7 +8,7 @@ module.exports = {
         version,
         title: "bingobongo",
         description: "",
-        githubUrl: "https://github.com/yiliansource/bingo-builder",
+        githubUrl: "https://github.com/yiliansource/bingobongo",
         copyright: ["Ian Hornik", "Alexander Zach"],
     },
     images: {
