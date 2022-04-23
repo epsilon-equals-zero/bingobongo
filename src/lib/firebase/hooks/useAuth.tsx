@@ -1,4 +1,5 @@
 import { User as FirebaseUser, onAuthStateChanged, signInWithPopup, signOut as firebaseSignOut } from "firebase/auth";
+import { useRouter } from "next/router";
 import { createContext, PropsWithChildren, useContext, useEffect, useState } from "react";
 
 import { auth, authProviders } from "..";
@@ -22,6 +23,10 @@ export interface AuthContextActions {
     signOut: () => Promise<void>;
 }
 
+export interface AuthOptions {
+    required?: boolean;
+}
+
 export type AuthContext = AuthContextData & AuthContextActions;
 
 const authContext = createContext<AuthContext>(null!); // eslint-disable-line @typescript-eslint/no-non-null-assertion
@@ -30,6 +35,8 @@ const useProvideAuth = () => {
     const [user, setUser] = useState<AuthUser | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<Error | null>(null);
+
+    const router = useRouter();
 
     const setFirebaseUser = async (user: FirebaseUser) => {
         setUser({
@@ -56,6 +63,7 @@ const useProvideAuth = () => {
     const signOut = async () => {
         setLoading(true);
         await firebaseSignOut(auth);
+        router.push("/");
         setUser(null);
         setLoading(false);
     };
@@ -94,4 +102,15 @@ export const AuthProvider = ({ children }: PropsWithChildren<unknown>) => {
     return <authContext.Provider value={auth}>{children}</authContext.Provider>;
 };
 
-export const useAuth = () => useContext(authContext);
+export function useAuth({ required = false }: AuthOptions = {}): AuthContext {
+    const auth = useContext(authContext);
+    const router = useRouter();
+
+    useEffect(() => {
+        if (required && !auth.user && !auth.loading) {
+            router.push(`/login?redirect=${encodeURI(router.asPath)}`);
+        }
+    }, [required, router, auth.user, auth.loading]);
+
+    return auth;
+}

@@ -17,7 +17,7 @@ export interface FirestorePaginationResult<T = DocumentData> {
 
 const gameConverter = new GameConverter();
 
-export const useOwnGameCollection = ({ pageSize = 1 } = {}): FirestorePaginationResult<Game> => {
+export const useOwnGameCollection = ({ pageSize = 10 } = {}): FirestorePaginationResult<Game> => {
     const { user, loading: userLoading } = useAuth();
     const [pages, setPages] = useState(1);
 

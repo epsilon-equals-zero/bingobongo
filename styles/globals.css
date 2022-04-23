@@ -9,3 +9,9 @@
     --secondary: #0b4f6c;
     --secondary-rgb: 11, 79, 108;
 }
+
+body {
+    @apply bg-background;
+
+    color: white;
+}

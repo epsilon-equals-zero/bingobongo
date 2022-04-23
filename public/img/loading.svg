@@ -1,0 +1,10 @@
+<svg version="1.1" id="L9" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+    viewBox="0 0 100 100" enable-background="new 0 0 0 0" xml:space="preserve">
+    <circle class="ring-track" fill="transparent" stroke-width="8px" stroke="#1f1f1f" opacity="0.1" cx="50" cy="50"
+        r="44" />
+    <circle class="loader-ring" fill="transparent" stroke-width="8px" stroke="currentColor" stroke-dashoffset="276.460"
+        stroke-dasharray="80 276.460" cx="50" cy="50" r="44">
+        <animateTransform attributeName="transform" attributeType="XML" type="rotate" dur="1s" repeatCount="indefinite"
+            from="0 50 50" to="360 50 50" />
+    </circle>
+</svg>

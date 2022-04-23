@@ -1,158 +1,64 @@
-import { Link, Delete, Edit, PlayArrow, MoreHoriz } from "@mui/icons-material";
+import { useRouter } from "next/router";
 import {
-    IconButton,
-    ListItem,
-    ListItemIcon,
-    Menu,
-    MenuItem,
-    Stack,
-    Tooltip,
-    Typography,
-    useMediaQuery,
-} from "@mui/material";
-import { useTheme } from "@mui/system";
-import { MouseEvent, useState } from "react";
+    MdDelete as DeleteIcon,
+    MdEdit as EditIcon,
+    MdLink as LinkIcon,
+    MdList as ListIcon,
+    MdPlayArrow as PlayIcon,
+} from "react-icons/md";
 
-import { Game, WithRefPart } from "src/lib/firebase/firestoreTypes";
+import { Game, WithRefPart } from "@lib/firebase/firestoreTypes";
 
 export interface OwnGameListItemProps {
     game: WithRefPart<Game>;
 }
 
-function SecondaryActionsMdUp() {
-    return (
-        <>
-            <Tooltip title="Play">
-                <IconButton>
-                    <PlayArrow />
-                </IconButton>
-            </Tooltip>
-            <Tooltip title="Copy Link">
-                <IconButton>
-                    <Link />
-                </IconButton>
-            </Tooltip>
-            <Tooltip title="Edit">
-                <IconButton>
-                    <Edit />
-                </IconButton>
-            </Tooltip>
-            <Tooltip title="Delete">
-                <IconButton>
-                    <Delete />
-                </IconButton>
-            </Tooltip>
-        </>
-    );
-}
-
-function SecondaryActionsSmDown() {
-    const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
-    const open = Boolean(anchorEl);
-
-    const handleOpen = (event: MouseEvent<HTMLElement>) => {
-        setAnchorEl(event.currentTarget);
-    };
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
-
-    return (
-        <>
-            <Tooltip title="Actions">
-                <IconButton
-                    onClick={handleOpen}
-                    aria-controls={open ? "account-menu" : undefined}
-                    aria-haspopup="true"
-                    aria-expanded={open ? "true" : undefined}
-                >
-                    <MoreHoriz />
-                </IconButton>
-            </Tooltip>
-            <Menu
-                anchorEl={anchorEl}
-                id="account-menu"
-                open={open}
-                onClose={handleClose}
-                onClick={handleClose}
-                PaperProps={{
-                    elevation: 0,
-                    sx: {
-                        overflow: "visible",
-                        filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
-                        mt: 1.5,
-                        "& .MuiAvatar-root": {
-                            width: 32,
-                            height: 32,
-                            ml: -0.5,
-                            mr: 1,
-                        },
-                        "&:before": {
-                            content: '""',
-                            display: "block",
-                            position: "absolute",
-                            top: 0,
-                            right: 14,
-                            width: 10,
-                            height: 10,
-                            bgcolor: "background.paper",
-                            transform: "translateY(-50%) rotate(45deg)",
-                            zIndex: 0,
-                        },
-                    },
-                }}
-                transformOrigin={{ horizontal: "right", vertical: "top" }}
-                anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
-            >
-                <MenuItem>
-                    <ListItemIcon>
-                        <PlayArrow />
-                    </ListItemIcon>
-                    Play
-                </MenuItem>
-                <MenuItem>
-                    <ListItemIcon>
-                        <Link />
-                    </ListItemIcon>
-                    Copy Link
-                </MenuItem>
-                <MenuItem>
-                    <ListItemIcon>
-                        <Edit />
-                    </ListItemIcon>
-                    Edit
-                </MenuItem>
-                <MenuItem>
-                    <ListItemIcon>
-                        <Delete />
-                    </ListItemIcon>
-                    Delete
-                </MenuItem>
-            </Menu>
-        </>
-    );
-}
-
 export function OwnGameListItem({ game }: OwnGameListItemProps) {
-    const { breakpoints } = useTheme();
-    const mdUp = useMediaQuery(breakpoints.up("md"));
+    const router = useRouter();
 
     let categories = game.categories.join(", ");
     if (categories.length > 65) {
-        categories = categories.substr(0, 63) + "...";
+        categories = categories.substring(0, 64) + "...";
     }
 
+    const actions = [
+        { icon: PlayIcon, onClick: () => router.push(`/b/${game.id}`) },
+        { icon: LinkIcon, onClick: () => void 0 },
+        { icon: EditIcon, onClick: () => router.push(`/b/${game.id}/edit`) },
+        { icon: DeleteIcon, onClick: () => void 0 },
+    ];
+
     return (
-        <ListItem
-            key={game.id + "_item"}
-            secondaryAction={mdUp ? <SecondaryActionsMdUp /> : <SecondaryActionsSmDown />}
-        >
-            <Stack direction="column">
-                <Typography fontWeight="bold">{game.name}</Typography>
-                <Typography fontSize="small">
-                    Gamecode: {game.id}, Size: {game.size}x{game.size}, Categories: {categories}{" "}
-                </Typography>
-            </Stack>
-        </ListItem>
+        <div className="flex flex-row px-6 py-3 border-b last:border-0 items-center">
+            <div>
+                <div>
+                    <span className="font-bold text-green-800">{game.name}</span>
+                    <span className="ml-2 text-sm text-gray-400">({game.id})</span>
+                </div>
+                <div>
+                    <span>
+                        <span className="inline-block mr-1 align-middle">
+                            <ListIcon />
+                        </span>
+                        <span className="text-sm">
+                            Categories: <span className="text-gray-600">{categories}</span>
+                        </span>
+                    </span>
+                </div>
+            </div>
+            <div className="mr-0 ml-auto">
+                <div className="flex flex-row space-x-1">
+                    {actions.map((a, i) => (
+                        <div
+                            key={i}
+                            className="text-lg p-2 rounded-full cursor-pointer hover:bg-gray-200"
+                            onClick={a.onClick}
+                        >
+                            <a.icon />
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </div>
     );
 }

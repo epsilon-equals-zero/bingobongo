@@ -20,7 +20,8 @@
             "@lib/*": ["src/lib/*"],
             "@typings/*": ["src/typings/*"],
             "@pages/*": ["src/pages/*"],
-            "@css/*": ["styles/*"]
+            "@css/*": ["styles/*"],
+            "@public/*": ["public/*"]
         },
         "incremental": true
     },

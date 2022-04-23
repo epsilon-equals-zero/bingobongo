@@ -9,5 +9,9 @@ module.exports = {
         title: "bingobongo",
         description: "",
         githubUrl: "https://github.com/yiliansource/bingo-builder",
+        copyright: ["Ian Hornik", "Alexander Zach"],
+    },
+    images: {
+        domains: ["lh3.googleusercontent.com"],
     },
 };

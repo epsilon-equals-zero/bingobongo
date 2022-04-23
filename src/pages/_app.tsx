@@ -1,21 +1,22 @@
-import "@css/globals.css";
 import { AppProps } from "next/app";
 import Head from "next/head";
 import React from "react";
 
-import { ComponentTypeWithLayout, DEFAULT_LAYOUT } from "src/lib/helpers/layout";
+import "@css/globals.css";
+import { AuthProvider } from "@lib/firebase/hooks/useAuth";
+import { PageWithLayout, DEFAULT_LAYOUT } from "@lib/hoc/withLayout";
 
-export default function MyApp({ Component, pageProps }: AppProps): React.ReactElement {
-    const Layout = (Component as ComponentTypeWithLayout<React.PropsWithChildren<unknown>>)._layout || DEFAULT_LAYOUT;
+export default function BingoApp({ Component, pageProps }: AppProps): React.ReactElement {
+    const Layout = (Component as PageWithLayout).layout || DEFAULT_LAYOUT;
 
     return (
-        <>
+        <AuthProvider>
             <Head>
                 <title>bingobongo</title>
             </Head>
             <Layout>
                 <Component {...pageProps} />
             </Layout>
-        </>
+        </AuthProvider>
     );
 }
