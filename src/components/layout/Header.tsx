@@ -1,28 +1,29 @@
-import { Stack, Typography } from "@mui/material";
-import { Box } from "@mui/system";
 import getConfig from "next/config";
+import Link from "next/link";
 
-// import Image from "next/image";
+import { AuthWidget } from "@components/auth/AuthWidget";
 
 const { publicRuntimeConfig: config } = getConfig();
 
 export function Header() {
     return (
-        <Box component="header" my={{ xs: 4, sm: 6 }}>
-            <Stack direction="row" alignItems="center">
-                {/* <Box mx={2} sx={{ display: { xs: "none", sm: "block" } }}>
-                    <Image src={PDFGroupLogo} alt="pdfgroup Logo" height={82} width={82} draggable="false" priority />
-                </Box> */}
-                <Box>
-                    <Typography variant="h2" display="inline-block">
-                        {config?.title}
-                    </Typography>
-                    <Typography variant="body2" ml={1} display="inline-block">
-                        v{config?.version}
-                    </Typography>
-                    <Typography variant="body1">{config?.description}</Typography>
-                </Box>
-            </Stack>
-        </Box>
+        <header className="grid py-6 px-8" style={{ gridTemplateColumns: "64px 1fr 64px" }}>
+            <div></div>
+            <div className="mx-auto text-center select-none">
+                <Link href="/" passHref>
+                    <a>
+                        <p className="text-2xl font-title leading-5">
+                            bingo
+                            <br />
+                            bongo
+                        </p>
+                        <p className="text-xs opacity-50">v{config?.version}</p>
+                    </a>
+                </Link>
+            </div>
+            <div className="flex flex-row justify-end">
+                <AuthWidget />
+            </div>
+        </header>
     );
 }

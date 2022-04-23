@@ -1,36 +1,22 @@
-import { CacheProvider } from "@emotion/react";
-import type { EmotionCache } from "@emotion/utils";
-import { CssBaseline } from "@mui/material";
-import type { AppProps } from "next/app";
+import { AppProps } from "next/app";
+import Head from "next/head";
 import React from "react";
 
-import { ComponentTypeWithLayout, DEFAULT_LAYOUT } from "src/lib/helpers/layout";
-import createEmotionCache from "src/lib/styles/createEmotionCache";
-import { ThemeProvider } from "src/lib/styles/theme";
+import "@css/globals.css";
+import { AuthProvider } from "@lib/firebase/hooks/useAuth";
+import { PageWithLayout, DEFAULT_LAYOUT } from "@lib/hoc/withLayout";
 
-import "./App.css";
-
-const clientSideEmotionCache = createEmotionCache();
-
-interface MyAppProps extends AppProps {
-    emotionCache?: EmotionCache;
-}
-
-export default function MyApp({
-    Component,
-    emotionCache = clientSideEmotionCache,
-    pageProps,
-}: MyAppProps): React.ReactElement {
-    const Layout = (Component as ComponentTypeWithLayout<React.PropsWithChildren<unknown>>)._layout || DEFAULT_LAYOUT;
+export default function BingoApp({ Component, pageProps }: AppProps): React.ReactElement {
+    const Layout = (Component as PageWithLayout).layout || DEFAULT_LAYOUT;
 
     return (
-        <CacheProvider value={emotionCache}>
-            <ThemeProvider>
-                <CssBaseline enableColorScheme />
-                <Layout>
-                    <Component {...pageProps} />
-                </Layout>
-            </ThemeProvider>
-        </CacheProvider>
+        <AuthProvider>
+            <Head>
+                <title>bingobongo</title>
+            </Head>
+            <Layout>
+                <Component {...pageProps} />
+            </Layout>
+        </AuthProvider>
     );
 }

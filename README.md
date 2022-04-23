@@ -1,7 +1,7 @@
 <div align="center">
     <h4>
-        <a href="https://github.com/yiliansource/bingo-builder/commits/main">
-            <img src="https://img.shields.io/github/last-commit/yiliansource/bingo-builder"/>
+        <a href="https://github.com/yiliansource/bingobongo/commits/main">
+            <img src="https://img.shields.io/github/last-commit/yiliansource/bingobongo"/>
         </a>
     </h4>
 </div>
