@@ -36,7 +36,7 @@ function UserView() {
     if (!user) return null;
 
     return (
-        <div className="relative" ref={profileRef}>
+        <div className="relative select-none" ref={profileRef}>
             <div className="relative w-10 h-10 rounded-full overflow-hidden cursor-pointer" onClick={handleOpen}>
                 <Image
                     src={user.photoUrl || ""}

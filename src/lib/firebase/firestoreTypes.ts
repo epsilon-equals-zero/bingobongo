@@ -10,8 +10,8 @@ export type Game = WithId<
         WithTimestamps<{
             name: string;
             size: number;
-            categories: Array<string>;
-            uid: number;
+            categories: string[];
+            uid: string;
         }>
     >
 >;
