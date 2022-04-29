@@ -1,4 +1,4 @@
-import { LoadingSpinner } from "@components/LoadingSpinner";
+import { LoadingSpinner } from "@components/util/LoadingSpinner";
 import { useOwnGameCollection } from "@lib/firebase/hooks/useOwnGameCollectionDataOnce";
 
 import { OwnGameListItem } from "./OwnGameListItem";

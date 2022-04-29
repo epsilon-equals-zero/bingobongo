@@ -2,10 +2,9 @@ import { doc, getDoc } from "firebase/firestore";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { useDocumentOnce } from "react-firebase-hooks/firestore";
 import { MdEdit as EditIcon } from "react-icons/md";
 
-import { LoadingSpinner } from "@components/LoadingSpinner";
+import { LoadingSpinner } from "@components/util/LoadingSpinner";
 import { db } from "@lib/firebase";
 import { Game, GameConverter } from "@lib/firebase/firestoreTypes";
 import withAuth, { AuthPageProps } from "@lib/hoc/withAuth";

@@ -2,16 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-    --primary: #20bf55;
-    --primary-rgb: 32, 191, 85;
-
-    --secondary: #0b4f6c;
-    --secondary-rgb: 11, 79, 108;
-}
-
 body {
-    @apply bg-background;
+    @apply bg-green;
 
     color: white;
 }

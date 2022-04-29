@@ -5,7 +5,7 @@ import { useRef, useState } from "react";
 import { MdList as ListIcon, MdLogout as LogoutIcon } from "react-icons/md";
 import { MdLogin as LoginIcon } from "react-icons/md";
 
-import { LoadingSpinner } from "@components/LoadingSpinner";
+import { LoadingSpinner } from "@components/util/LoadingSpinner";
 import { useAuth } from "@lib/firebase/hooks/useAuth";
 import { useOutsideAlerter } from "@lib/hooks/useOutsideAlerter";
 

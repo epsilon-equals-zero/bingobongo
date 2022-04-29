@@ -1,20 +1,26 @@
 import { faker } from "@faker-js/faker";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
-import { nanoid } from "nanoid";
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
 import React, { useMemo, useState } from "react";
 
 import { db } from "@lib/firebase";
 import withAuth, { AuthPageProps } from "@lib/hoc/withAuth";
+import { gameIdGenerator } from "@lib/util/gameIdGenerator";
 
 const NewBingo: NextPage<AuthPageProps> = ({ user }) => {
     const [name, setName] = useState<string>("");
-    const [error, setError] = useState<boolean>(false);
+    const [hasError, setError] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(false);
 
     const router = useRouter();
-    const placeholder = useMemo(() => faker.word.adjective() + " " + faker.word.noun(), []);
+    const placeholder = useMemo(
+        () =>
+            faker.word.adjective(Math.floor(Math.random() * 6) + 4) +
+            " " +
+            faker.word.noun(Math.floor(Math.random() * 5) + 4),
+        []
+    );
 
     const validateName = (n: string) => n.length > 2 && n.length <= 20 && /^.+$/.test(n);
 
@@ -29,7 +35,7 @@ const NewBingo: NextPage<AuthPageProps> = ({ user }) => {
         else {
             setLoading(true);
             (async function () {
-                const id = nanoid(8);
+                const id = gameIdGenerator(8);
                 await setDoc(doc(db, "games", id), {
                     categories: [],
                     createdAt: serverTimestamp(),
@@ -51,7 +57,10 @@ const NewBingo: NextPage<AuthPageProps> = ({ user }) => {
                 <div>
                     <form className="flex flex-row space-x-2">
                         <input
-                            className="py-3 px-5 bg-white/20 text-xl text-center font-bold color-white rounded outline-none focus:bg-white/40 placeholder:text-white/50"
+                            className={
+                                "py-3 px-5 bg-white/20 text-xl text-center font-bold color-white rounded outline-none focus:bg-white/40 placeholder:text-white/50" +
+                                (hasError ? "border-red-700" : "")
+                            }
                             value={name}
                             onChange={handleChange}
                             placeholder={placeholder || ""}

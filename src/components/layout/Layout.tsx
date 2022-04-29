@@ -1,12 +1,14 @@
 import React from "react";
 
 import { Footer } from "./Footer";
-import { Header } from "./Header";
+import { Header, HeaderProps } from "./Header";
+
+export type LayoutProps = HeaderProps;
 
 /**
  * A general layouting component for the application.
  */
-export function Layout({ children }: React.PropsWithChildren<unknown>) {
+export function Layout({ branding, authWidget, children }: React.PropsWithChildren<LayoutProps>) {
     return (
         <div className="relative flex flex-col min-h-screen">
             <div className="pointer-events-none -z-10">
@@ -20,7 +22,7 @@ export function Layout({ children }: React.PropsWithChildren<unknown>) {
                 ></div>
             </div>
 
-            <Header />
+            <Header branding={branding} authWidget={authWidget} />
             <main className="flex flex-col flex-grow max-w-5xl w-full mx-auto">{children}</main>
             <Footer />
         </div>
