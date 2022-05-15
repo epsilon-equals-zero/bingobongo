@@ -14,7 +14,17 @@ const IndexPage: NextPage = () => {
     const validateBingoCode = (c: string) => /^[A-Za-z0-9]{4}-[A-Za-z0-9]{4}$/.test(c);
 
     const handleCodeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const code = e.target.value;
+        let code = e.target.value;
+
+        if (code.length > 9) {
+            return
+        }
+        if (code.length == 4 && bingoCode.length < 4) {
+            code += "-"
+        }
+        if (code.length == 5 && code.charAt(4) != "-") {
+            code = code.substr(0, 4) + "-" + code.substr(4)
+        }
 
         setBingoCode(code);
     };

@@ -9,6 +9,7 @@ import { db } from "@lib/firebase";
 import { Game, GameConverter } from "@lib/firebase/firestoreTypes";
 import withAuth, { AuthPageProps } from "@lib/hoc/withAuth";
 import { range } from "@lib/util/collections";
+import { EditableText } from "@components/util/EditableText";
 
 const gameConverter = new GameConverter();
 
@@ -37,10 +38,11 @@ const EditBingoPage: NextPage<AuthPageProps> = ({ user }) => {
     return (
         <div>
             <div className="flex flex-row items-center space-x-4">
-                <h1 className="text-5xl font-title">{game.name}</h1>
+                <EditableText text={game.name} />
+                {/* <h1 className="text-5xl font-title">{game.name}</h1>
                 <div className="text-3xl opacity-50">
                     <EditIcon />
-                </div>
+                </div> */}
             </div>
 
             <div className="flex flex-row space-x-1">

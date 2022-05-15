@@ -25,8 +25,8 @@ export function PopUp({
     return (
         <div
             className={
-                "transition ease-in-out absolute top-0 left-0 w-screen h-screen z-40 " +
-                (open ? "" : "hidden opacity-0")
+                "transition ease-in-out fixed top-0 left-0 w-screen h-screen z-40 " +
+                (open ? "" : "hidden opacity-0 pointer-events-none")
             }
         >
             <div onClick={onClickBackground} className={"modal-bg bg-neutral-900 opacity-70 w-full h-full"}></div>
