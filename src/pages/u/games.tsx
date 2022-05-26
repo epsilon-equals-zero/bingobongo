@@ -3,6 +3,7 @@ import Link from "next/link";
 import React from "react";
 
 import { OwnGameList } from "@components/gameEditor/OwnGameList";
+import { Button } from "@components/util/Button";
 import withAuth, { AuthPageProps } from "@lib/hoc/withAuth";
 
 const GamesPage: NextPage<AuthPageProps> = ({}: AuthPageProps) => {
@@ -14,10 +15,13 @@ const GamesPage: NextPage<AuthPageProps> = ({}: AuthPageProps) => {
                 </div>
                 <div>
                     <Link href="/b/new">
-                        <a className="py-2 px-4 rounded font-bold bg-gray-800">New Bingo</a>
+                        <a>
+                            <Button>New Bingo</Button>
+                        </a>
                     </Link>
                 </div>
             </div>
+
             <OwnGameList />
         </>
     );

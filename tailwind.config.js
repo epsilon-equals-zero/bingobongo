@@ -4,11 +4,8 @@ module.exports = {
     theme: {
         extend: {
             colors: {
-                green: "hsl(101, 72%, 33%)",
-                "green-dark": "hsl(101, 72%, 28%)",
-                "green-darker": "hsl(101, 72%, 23%)",
-                "green-light": "hsl(101, 72%, 40%)",
-                "green-lighter": "hsl(101, 72%, 90%)",
+                background: "hsl(101, 72%, 33%)",
+                "background-darker": "hsl(101, 72%, 28%)",
             },
             fontFamily: {
                 sans: [

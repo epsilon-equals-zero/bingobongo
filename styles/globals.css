@@ -3,7 +3,12 @@
 @tailwind utilities;
 
 body {
-    @apply bg-green;
+    @apply bg-background;
 
     color: white;
+}
+
+form input:focus,
+form button:focus {
+    @apply outline outline-green-400 outline-2 outline-offset-2;
 }

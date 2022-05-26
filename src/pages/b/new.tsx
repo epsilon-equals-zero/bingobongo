@@ -1,9 +1,11 @@
 import { faker } from "@faker-js/faker";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
+import { motion } from "framer-motion";
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
 import React, { useMemo, useState } from "react";
 
+import { Button } from "@components/util/Button";
 import { db } from "@lib/firebase";
 import withAuth, { AuthPageProps } from "@lib/hoc/withAuth";
 import { gameIdGenerator } from "@lib/util/gameIdGenerator";
@@ -25,14 +27,17 @@ const NewBingo: NextPage<AuthPageProps> = ({ user }) => {
     const validateName = (n: string) => n.length > 2 && n.length <= 20 && /^.+$/.test(n);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setName(e.target.value);
+        if (loading) return;
+
+        const name = e.target.value;
+        setName(name);
+        setError(!validateName(name));
     };
     const submit = (e: React.MouseEvent) => {
         e.preventDefault();
         if (loading) return;
 
-        if (!validateName(name)) setError(true);
-        else {
+        if (validateName(name)) {
             setLoading(true);
             (async function () {
                 const id = gameIdGenerator();
@@ -52,28 +57,27 @@ const NewBingo: NextPage<AuthPageProps> = ({ user }) => {
 
     return (
         <div className="m-auto">
-            <div className="flex flex-col items-center">
-                <h1 className="mb-2 font-title text-5xl">Create a new bingo</h1>
-                <div>
-                    <form className="flex flex-row space-x-2">
-                        <input
-                            className={
-                                "py-3 px-5 bg-white/20 text-xl text-center font-bold color-white rounded outline-none focus:bg-white/40 placeholder:text-white/50" +
-                                (hasError ? "border-red-700" : "")
-                            }
-                            value={name}
-                            onChange={handleChange}
-                            placeholder={placeholder || ""}
-                        />
-                        <button
-                            className="py-3 px-4 text-xl font-bold bg-gray-800 rounded cursor-pointer select-none"
-                            onClick={submit}
-                        >
-                            Go!
-                        </button>
-                    </form>
+            <motion.div
+                className="flex flex-col items-center"
+                initial={{ opacity: 0, translateY: 16 }}
+                animate={{ opacity: 1, translateY: 0 }}
+            >
+                <h1 className="mb-4 font-title text-5xl">Create a new bingo!</h1>
+                <div className="flex flex-row space-x-2">
+                    <input
+                        className={
+                            "py-3 px-5 bg-white/20 text-xl text-center font-bold color-white rounded outline-none focus:bg-white/40 placeholder:text-white/50 " +
+                            (hasError ? "bg-red-300/20 text-red-300 focus:bg-red-300/40" : "")
+                        }
+                        value={name}
+                        onChange={handleChange}
+                        placeholder={placeholder || ""}
+                    />
+                    <Button size="large" onClick={submit}>
+                        Go!
+                    </Button>
                 </div>
-            </div>
+            </motion.div>
         </div>
     );
 };

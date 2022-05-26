@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 
+import { Button } from "@components/util/Button";
 import withLayout, { WITHOUT_BRANDING } from "@lib/hoc/withLayout";
 
 const IndexPage: NextPage = () => {
@@ -54,12 +55,9 @@ const IndexPage: NextPage = () => {
                             value={bingoCode}
                             onChange={handleCodeChange}
                         />
-                        <button
-                            className="block w-full rounded bg-stone-700 text-white p-2 font-bold"
-                            onClick={handleJoinClick}
-                        >
+                        <Button className="block w-full " onClick={handleJoinClick}>
                             Join
-                        </button>
+                        </Button>
                     </form>
                 </div>
             </div>

@@ -1,4 +1,6 @@
+import copy from "clipboard-copy";
 import { useRouter } from "next/router";
+import toast from "react-hot-toast";
 import {
     MdDelete as DeleteIcon,
     MdEdit as EditIcon,
@@ -11,9 +13,11 @@ import { Game, WithRefPart } from "@lib/firebase/firestoreTypes";
 
 export interface OwnGameListItemProps {
     game: WithRefPart<Game>;
+
+    onDeleteClick?(): void;
 }
 
-export function OwnGameListItem({ game }: OwnGameListItemProps) {
+export function OwnGameListItem({ game, onDeleteClick }: OwnGameListItemProps) {
     const router = useRouter();
 
     let categories = game.categories.join(", ");
@@ -23,9 +27,16 @@ export function OwnGameListItem({ game }: OwnGameListItemProps) {
 
     const actions = [
         { icon: PlayIcon, onClick: () => router.push(`/b/${game.id}`) },
-        { icon: LinkIcon, onClick: () => void 0 },
+        {
+            icon: LinkIcon,
+            onClick: () => {
+                copy(window.origin + "/b/" + game.id)
+                    .then(() => toast.success("Bingo link copied to clipboard!"))
+                    .catch(() => toast.error("Copying game link failed."));
+            },
+        },
         { icon: EditIcon, onClick: () => router.push(`/b/${game.id}/edit`) },
-        { icon: DeleteIcon, onClick: () => void 0 },
+        { icon: DeleteIcon, onClick: () => onDeleteClick?.() },
     ];
 
     return (

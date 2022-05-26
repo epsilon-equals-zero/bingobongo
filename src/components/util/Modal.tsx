@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { MouseEventHandler } from "react";
 
-import { Button } from "./Button";
+import { Button, ButtonColorVariant } from "./Button";
 
 interface ModalProps {
     open: boolean;
@@ -9,6 +9,9 @@ interface ModalProps {
 
     primaryBtnText: string;
     secondaryBtnText?: string;
+
+    primaryBtnColor?: ButtonColorVariant;
+    secondaryBtnColor?: ButtonColorVariant;
 
     onPrimaryBtnClick?: MouseEventHandler;
     onSecondaryBtnClick?: MouseEventHandler;
@@ -18,11 +21,17 @@ interface ModalProps {
 export function Modal({
     open,
     title,
+
     primaryBtnText,
-    onPrimaryBtnClick,
     secondaryBtnText,
+
+    primaryBtnColor = "success",
+    secondaryBtnColor = "plain",
+
+    onPrimaryBtnClick,
     onSecondaryBtnClick,
     onBackgroundClick,
+
     children,
 }: React.PropsWithChildren<ModalProps>) {
     return (
@@ -53,11 +62,15 @@ export function Modal({
                                 <h3 className="text-xl font-bold leading-normal">{title}</h3>
                             </div>
                             <div className="modal-body p-4">{children}</div>
-                            <div className="modal-footer flex items-center justify-end px-4 py-3 border-t border-gray-200">
+                            <div className="modal-footer flex flex-row gap-1 items-center justify-end px-4 pb-3">
                                 {secondaryBtnText && (
-                                    <Button variant="outlined" text={secondaryBtnText} onClick={onSecondaryBtnClick} />
+                                    <Button color={secondaryBtnColor} onClick={onSecondaryBtnClick}>
+                                        {secondaryBtnText}
+                                    </Button>
                                 )}
-                                <Button variant="contained" text={primaryBtnText} onClick={onPrimaryBtnClick} />
+                                <Button color={primaryBtnColor} onClick={onPrimaryBtnClick}>
+                                    {primaryBtnText}
+                                </Button>
                             </div>
                         </div>
                     </motion.div>

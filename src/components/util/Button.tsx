@@ -1,38 +1,57 @@
-import { MouseEventHandler } from "react";
+import { motion } from "framer-motion";
+import React from "react";
 
-export interface ButtonProps {
-    variant?: "contained" | "outlined";
-    text?: string;
-    onClick?: MouseEventHandler;
+export type ButtonColorVariant = "success" | "error" | "plain";
+export type ButtonSizeVariant = "normal" | "large";
+
+export interface ButtonProps
+    extends React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
+    color?: ButtonColorVariant;
+    size?: ButtonSizeVariant;
 }
 
-export function Button({ variant = "contained", text, onClick }: ButtonProps) {
+export function Button({
+    color = "plain",
+    size = "normal",
+    children,
+    className = "",
+    type = "button",
+    ...props
+}: ButtonProps) {
+    const { text, background, shadow } = colorToTailwind(color);
+    const { fontSize, padding } = sizeToTailwind(size);
+
     return (
-        <button
-            onClick={onClick}
-            className={`
-        px-6 py-2 ml-3
-        border-2
-        border-green
-        ${variant == "contained" ? "bg-green" : "bg-white"}
-        ${variant == "contained" ? "text-white" : "text-green"}
-        font-medium
-        text-xs
-        uppercase
-        rounded
-        shadow-md
-        hover:${variant == "contained" ? "bg-green-dark" : "bg-green-lighter"} hover:border-green-dark hover:shadow-lg
-        focus:${
-            variant == "contained" ? "bg-green-dark" : "bg-green-lighter"
-        } focus:border-green-dark focus:shadow-lg focus:outline-none focus:ring-0
-        active:${
-            variant == "contained" ? "bg-green-darker" : "bg-green-light"
-        } active:border-green-darker active:shadow-lg
-        transition
-        duration-150
-        ease-in-out`}
-        >
-            {text}
+        <button className={`relative font-bold ${fontSize} ${text} !outline-none ` + className} type={type} {...props}>
+            <span className={`block absolute inset-0 ${shadow} rounded`}></span>
+            <motion.span
+                className={`block relative ${padding} ${background} rounded -translate-y-1`}
+                animate={{ translateY: -4 }}
+                whileHover={{ translateY: -2 }}
+                whileTap={{ translateY: 0 }}
+            >
+                {children}
+            </motion.span>
         </button>
     );
+}
+
+function colorToTailwind(color: ButtonColorVariant): { text: string; background: string; shadow: string } {
+    switch (color) {
+        case "success":
+            return { text: "text-white", background: "bg-lime-500", shadow: "bg-lime-600" };
+        case "error":
+            return { text: "text-white", background: "bg-red-500", shadow: "bg-red-700" };
+
+        default:
+            return { text: "text-white", background: "bg-stone-700", shadow: "bg-stone-800" };
+    }
+}
+function sizeToTailwind(size: ButtonSizeVariant): { fontSize: string; padding: string } {
+    switch (size) {
+        case "large":
+            return { fontSize: "text-xl", padding: "px-6 py-3" };
+        default:
+            return { fontSize: "text-base", padding: "px-4 py-2" };
+    }
 }

@@ -195,11 +195,11 @@ function BingoCard({ index, category, isChecked, onClick }: BingoCardProps) {
             whileHover={{
                 scale: 1.1,
                 boxShadow: "0px 0 16px -0px rgb(0, 0, 0, 0.25)",
-                zIndex: 100,
+                zIndex: 5,
             }}
             onClick={onClick}
         >
-            <div className="absolute inset-0 flex justify-center items-center">{category}</div>
+            <div className="absolute inset-0 flex justify-center items-center text-center p-3">{category}</div>
         </motion.div>
     );
 }
