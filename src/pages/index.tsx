@@ -45,20 +45,18 @@ const IndexPage: NextPage = () => {
                     bongo
                 </h1>
                 <div className="p-4 rounded bg-white text-stone-800">
-                    <form>
-                        <input
-                            placeholder="Bingo Code"
-                            className={
-                                "block border-2 rounded py-2 px-4 mb-1 text-center font-bold outline-none focus:border-stone-500 " +
-                                (hasError ? "border-red-700" : "")
-                            }
-                            value={bingoCode}
-                            onChange={handleCodeChange}
-                        />
-                        <Button className="block w-full " onClick={handleJoinClick}>
-                            Join
-                        </Button>
-                    </form>
+                    <input
+                        placeholder="Bingo Code"
+                        className={
+                            "block border-2 rounded py-2 px-4 mb-2 text-center font-bold outline-none focus:border-stone-500 " +
+                            (hasError ? "border-red-700" : "")
+                        }
+                        value={bingoCode}
+                        onChange={handleCodeChange}
+                    />
+                    <Button className="block w-full " onClick={handleJoinClick}>
+                        Join
+                    </Button>
                 </div>
             </div>
             <p className="pt-4">
