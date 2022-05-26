@@ -1,15 +1,16 @@
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
+import update from "immutability-helper";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { MdEdit as EditIcon } from "react-icons/md";
 
+import { EditableText } from "@components/util/EditableText";
 import { LoadingSpinner } from "@components/util/LoadingSpinner";
 import { db } from "@lib/firebase";
 import { Game, GameConverter } from "@lib/firebase/firestoreTypes";
 import withAuth, { AuthPageProps } from "@lib/hoc/withAuth";
 import { range } from "@lib/util/collections";
-import { EditableText } from "@components/util/EditableText";
 
 const gameConverter = new GameConverter();
 
@@ -19,9 +20,10 @@ const EditBingoPage: NextPage<AuthPageProps> = ({ user }) => {
 
     const router = useRouter();
     const gameId = router.query.id?.toString() || "";
+    const docRef = useMemo(() => doc(db, "games", gameId), [gameId]);
 
     useEffect(() => {
-        getDoc(doc(db, "games", gameId)).then((docSnap) => {
+        getDoc(docRef).then((docSnap) => {
             if (docSnap.exists()) {
                 setLoading(false);
                 setGame(gameConverter.fromFirestore(docSnap));
@@ -29,7 +31,16 @@ const EditBingoPage: NextPage<AuthPageProps> = ({ user }) => {
                 setLoading(false);
             }
         });
-    }, [gameId]);
+    }, [docRef]);
+
+    const updateGame = (g: Game) => {
+        g = update(g, {
+            updatedAt: { $set: new Date() },
+        });
+
+        setDoc(docRef, gameConverter.toFirestore(g));
+        setGame(g);
+    };
 
     if (loading) return <LoadingSpinner />;
     if (!game) return <div>Game not found.</div>;
@@ -37,7 +48,7 @@ const EditBingoPage: NextPage<AuthPageProps> = ({ user }) => {
 
     return (
         <div>
-            <div className="flex flex-row items-center space-x-4">
+            <div className="mb-2 text-4xl font-bold">
                 <EditableText text={game.name} />
                 {/* <h1 className="text-5xl font-title">{game.name}</h1>
                 <div className="text-3xl opacity-50">
@@ -45,17 +56,21 @@ const EditBingoPage: NextPage<AuthPageProps> = ({ user }) => {
                 </div> */}
             </div>
 
-            <div className="flex flex-row space-x-1">
-                {range(4, 8).map((s) => (
-                    <div
-                        key={s}
-                        className={`bg-white py-1 px-3 text-black ${
-                            game.size === s ? "opacity-100" : "opacity-50"
-                        } rounded`}
-                    >
-                        {s}
-                    </div>
-                ))}
+            <div className="mb-2">
+                <label>Board Size:</label>
+                <div className="flex flex-row space-x-1">
+                    {range(4, 8).map((s) => (
+                        <div
+                            key={s}
+                            className={`bg-white py-1 px-3 text-black ${
+                                game.size === s ? "opacity-100" : "opacity-50"
+                            } rounded hover:opacity-100 hover:cursor-pointer`}
+                            onClick={() => updateGame(update(game, { size: { $set: s } }))}
+                        >
+                            {s}
+                        </div>
+                    ))}
+                </div>
             </div>
 
             <div>

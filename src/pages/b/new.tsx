@@ -35,7 +35,7 @@ const NewBingo: NextPage<AuthPageProps> = ({ user }) => {
         else {
             setLoading(true);
             (async function () {
-                const id = gameIdGenerator(8);
+                const id = gameIdGenerator();
                 await setDoc(doc(db, "games", id), {
                     categories: [],
                     createdAt: serverTimestamp(),

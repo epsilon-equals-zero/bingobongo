@@ -23,7 +23,7 @@ export function Layout({ branding, authWidget, children }: React.PropsWithChildr
             </div>
 
             <Header branding={branding} authWidget={authWidget} />
-            <main className="flex flex-col flex-grow max-w-5xl w-full mx-auto">{children}</main>
+            <main className="px-2 flex flex-col flex-grow max-w-5xl w-full mx-auto">{children}</main>
             <Footer />
         </div>
     );

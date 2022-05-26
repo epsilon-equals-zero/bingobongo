@@ -6,5 +6,5 @@ const customNanoId = customAlphabet(alphabet, 8);
 
 export const gameIdGenerator = () => {
     const id = customNanoId();
-    return id.substr(0, 4) + "-" + id.substr(4);
+    return id.substring(0, 4) + "-" + id.substring(4);
 };

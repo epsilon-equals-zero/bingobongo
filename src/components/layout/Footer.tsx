@@ -31,7 +31,7 @@ export function FooterContent() {
 
 export function Footer() {
     return (
-        <footer className="py-4 max-w-5xl w-full mx-auto grid grid-cols-3 select-none">
+        <footer className="py-4 px-4 max-w-5xl w-full mx-auto grid grid-cols-3 select-none text-sm opacity-50">
             <FooterContent />
         </footer>
     );

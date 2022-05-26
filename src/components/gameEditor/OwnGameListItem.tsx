@@ -29,7 +29,7 @@ export function OwnGameListItem({ game }: OwnGameListItemProps) {
     ];
 
     return (
-        <div className="flex flex-row px-6 py-3 border-b last:border-0 items-center">
+        <div className="flex flex-row px-6 py-3 bg-white border-b items-center">
             <div>
                 <div>
                     <span className="font-bold text-green-800">{game.name}</span>
