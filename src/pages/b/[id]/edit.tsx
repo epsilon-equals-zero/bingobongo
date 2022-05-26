@@ -3,7 +3,6 @@ import update from "immutability-helper";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { useEffect, useMemo, useState } from "react";
-import { MdEdit as EditIcon } from "react-icons/md";
 
 import { EditableText } from "@components/util/EditableText";
 import { LoadingSpinner } from "@components/util/LoadingSpinner";

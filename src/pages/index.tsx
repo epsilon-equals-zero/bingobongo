@@ -17,13 +17,13 @@ const IndexPage: NextPage = () => {
         let code = e.target.value;
 
         if (code.length > 9) {
-            return
+            return;
         }
         if (code.length == 4 && bingoCode.length < 4) {
-            code += "-"
+            code += "-";
         }
         if (code.length == 5 && code.charAt(4) != "-") {
-            code = code.substr(0, 4) + "-" + code.substr(4)
+            code = code.substr(0, 4) + "-" + code.substr(4);
         }
 
         setBingoCode(code);
