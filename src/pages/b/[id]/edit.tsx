@@ -90,6 +90,7 @@ const EditBingoPage: NextPage<AuthPageProps> = ({ user }) => {
                                 initial={{ scale: 0 }}
                                 animate={{ scale: 1 }}
                                 whileHover={{ scale: 1.2 }}
+                                whileTap={{ scale: 0.8 }}
                             >
                                 {s}
                             </motion.button>
@@ -121,13 +122,15 @@ const EditBingoPage: NextPage<AuthPageProps> = ({ user }) => {
                                             }
                                         }}
                                     />
-                                    <button
+                                    <motion.button
                                         type="button"
-                                        className="rounded flex items-center justify-center w-8 ml-1 text-red-400 text-xl"
+                                        className="rounded flex items-center justify-center w-8 ml-1 text-red-500 text-xl !outline-none"
                                         onClick={() => updateGame({ categories: { $splice: [[i, 1]] } })}
+                                        whileHover={{ scale: 1.2 }}
+                                        whileTap={{ scale: 0.8 }}
                                     >
                                         <MdDelete />
-                                    </button>
+                                    </motion.button>
                                 </motion.li>
                             ))}
                         </AnimatePresence>

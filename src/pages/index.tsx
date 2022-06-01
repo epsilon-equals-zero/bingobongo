@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import type { NextPage } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -32,23 +33,29 @@ const IndexPage: NextPage = () => {
     const handleJoinClick = (e: React.MouseEvent) => {
         e.preventDefault();
 
-        if (!validateBingoCode(bingoCode)) setError(true);
-        else router.push("/b/" + bingoCode);
+        if (!validateBingoCode(bingoCode)) {
+            setError(true);
+        } else {
+            router.push("/b/" + bingoCode);
+        }
     };
 
     return (
         <div className="relative flex flex-col flex-1 items-center justify-center">
             <div className="max-w-xs">
-                <h1 className="mb-8 font-title text-center text-6xl select-none" style={{ lineHeight: 0.8 }}>
-                    bingo
-                    <br />
-                    bongo
-                </h1>
                 <div className="p-4 rounded bg-white text-stone-800">
-                    <input
+                    <h1
+                        className="p-8 px-16 mb-4 font-title text-center text-6xl select-none"
+                        style={{ lineHeight: 0.8 }}
+                    >
+                        bingo
+                        <br />
+                        bongo
+                    </h1>
+                    <motion.input
                         placeholder="Bingo Code"
                         className={
-                            "block border-2 rounded py-2 px-4 mb-2 text-center font-bold outline-none focus:border-stone-500 " +
+                            "block border-2 rounded w-full py-2 px-4 mb-2 text-center font-bold outline-none focus:border-stone-500 " +
                             (hasError ? "border-red-700" : "")
                         }
                         value={bingoCode}

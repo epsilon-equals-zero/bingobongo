@@ -9,6 +9,7 @@ import {
     MdPlayArrow as PlayIcon,
 } from "react-icons/md";
 
+import { IconButton } from "@components/util/Button";
 import { Game, WithRefPart } from "@lib/firebase/firestoreTypes";
 
 export interface OwnGameListItemProps {
@@ -60,13 +61,7 @@ export function OwnGameListItem({ game, onDeleteClick }: OwnGameListItemProps) {
             <div className="mr-0 ml-auto">
                 <div className="flex flex-row space-x-1">
                     {actions.map((a, i) => (
-                        <div
-                            key={i}
-                            className="text-lg p-2 rounded-full cursor-pointer hover:bg-gray-200"
-                            onClick={a.onClick}
-                        >
-                            <a.icon />
-                        </div>
+                        <IconButton key={i} icon={a.icon} color="light" onClick={a.onClick} />
                     ))}
                 </div>
             </div>

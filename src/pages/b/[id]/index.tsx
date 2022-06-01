@@ -193,7 +193,7 @@ function BingoCard({ index, category, isChecked, onClick }: BingoCardProps) {
             animate={{ opacity: 1, translateY: 0, transition: { delay: index * 0.02 } }}
             exit={{ opacity: 0, translateY: -10 }}
             whileHover={{
-                scale: 1.1,
+                scale: 1.05,
                 boxShadow: "0px 0 16px -0px rgb(0, 0, 0, 0.25)",
                 zIndex: 5,
             }}

@@ -26,7 +26,7 @@ export function Modal({
     secondaryBtnText,
 
     primaryBtnColor = "success",
-    secondaryBtnColor = "plain",
+    secondaryBtnColor = "dark",
 
     onPrimaryBtnClick,
     onSecondaryBtnClick,
@@ -61,7 +61,7 @@ export function Modal({
                             <div className="modal-header flex px-4 py-3 border-b border-gray-200">
                                 <h3 className="text-xl font-bold leading-normal">{title}</h3>
                             </div>
-                            <div className="modal-body p-4">{children}</div>
+                            <div className="modal-body p-4 mb-2">{children}</div>
                             <div className="modal-footer flex flex-row gap-1 items-center justify-end px-4 pb-3">
                                 {secondaryBtnText && (
                                     <Button color={secondaryBtnColor} onClick={onSecondaryBtnClick}>
