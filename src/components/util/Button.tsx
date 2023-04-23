@@ -56,8 +56,8 @@ function colorToClasses(color: ButtonColorVariant): ButtonClassNames {
         case "light":
             return {
                 root: "text-black",
-                body: "bg-stone-300",
-                shadow: "bg-stone-400",
+                body: "bg-stone-200",
+                shadow: "bg-stone-300",
             };
 
         case "dark":
@@ -99,8 +99,8 @@ export function Button({ color = "dark", size = "normal", children, ...props }: 
         <ButtonBase
             classNames={{
                 root: clsx(colorClasses.root, sizeClasses.root, "font-bold"),
-                body: clsx(colorClasses.body, sizeClasses.body, "rounded"),
-                shadow: clsx(colorClasses.shadow, sizeClasses.shadow, "rounded"),
+                body: clsx(colorClasses.body, sizeClasses.body, ""),
+                shadow: clsx(colorClasses.shadow, sizeClasses.shadow, ""),
             }}
             {...props}
         >
@@ -135,8 +135,8 @@ export function IconButton({ color = "dark", size = "normal", icon: Icon, ...pro
         <ButtonBase
             classNames={{
                 root: clsx(colorClasses.root, sizeClasses.root, "font-bold"),
-                body: clsx(colorClasses.body, sizeClasses.body, "rounded-lg"),
-                shadow: clsx(colorClasses.shadow, sizeClasses.shadow, "rounded-lg"),
+                body: clsx(colorClasses.body, sizeClasses.body, ""),
+                shadow: clsx(colorClasses.shadow, sizeClasses.shadow, ""),
             }}
             {...props}
         >

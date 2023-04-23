@@ -57,7 +57,7 @@ export function Modal({
                         animate={{ scale: 1, transition: { type: "spring", duration: 0.5, delay: 0.3 } }}
                         exit={{ scale: 0, transition: { type: "tween", duration: 0.3 } }}
                     >
-                        <div className="modal-paper relative flex flex-col w-full bg-white shadow-lg rounded-md">
+                        <div className="modal-paper relative flex flex-col w-full bg-white shadow-lg">
                             <div className="modal-header flex px-4 py-3 border-b border-gray-200">
                                 <h3 className="text-xl font-bold leading-normal">{title}</h3>
                             </div>

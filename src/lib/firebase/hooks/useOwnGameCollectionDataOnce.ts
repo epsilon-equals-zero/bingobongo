@@ -25,7 +25,7 @@ export const useOwnGameCollection = ({ pageSize = 10 } = {}): FirestorePaginatio
         return query(
             collection(db, "games"),
             where("uid", "==", user?.uid || ""),
-            orderBy("updatedAt"),
+            orderBy("updatedAt", "desc"),
             limit(pageSize * pages)
         ).withConverter(gameConverter);
     }, [user, pageSize, pages]);

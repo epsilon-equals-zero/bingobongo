@@ -4,7 +4,7 @@ export interface LoadingSpinnerProps {
 }
 export function LoadingSpinner({ size = 32, theme = "light" }: LoadingSpinnerProps) {
     return (
-        <div className={theme === "dark" ? "text-green-600" : "text-green-400"}>
+        <div className={theme === "dark" ? "text-red-600" : "text-red-400"}>
             <svg x="0px" y="0px" viewBox="0 0 100 100" width={size} height={size}>
                 <circle fill="transparent" strokeWidth="8px" stroke="#1f1f1f" opacity="0.1" cx="50" cy="50" r="44" />
                 <circle

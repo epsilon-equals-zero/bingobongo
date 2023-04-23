@@ -62,11 +62,14 @@ const NewBingo: NextPage<AuthPageProps> = ({ user }) => {
                 initial={{ opacity: 0, translateY: 16 }}
                 animate={{ opacity: 1, translateY: 0 }}
             >
-                <h1 className="mb-4 font-title text-5xl">Create a new bingo!</h1>
+                <div className="mb-6">
+                    <h1 className="mb-1 font-bold text-4xl">Time to create a new bingo!</h1>
+                    <p className="text-xl">First, we need a name:</p>
+                </div>
                 <div className="flex flex-row space-x-2">
                     <input
                         className={
-                            "py-3 px-5 bg-white/20 text-xl text-center font-bold color-white rounded outline-none focus:bg-white/40 placeholder:text-white/50 " +
+                            "py-3 px-5 bg-white/20 text-xl text-center font-bold color-white outline-none focus:bg-white/40 placeholder:text-white/50 " +
                             (hasError ? "bg-red-300/20 text-red-300 focus:bg-red-300/40" : "")
                         }
                         value={name}

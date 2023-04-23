@@ -3,8 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useRef, useState } from "react";
+import { IoLogInSharp as LoginIcon } from "react-icons/io5";
 import { MdList as ListIcon, MdLogout as LogoutIcon } from "react-icons/md";
-import { MdLogin as LoginIcon } from "react-icons/md";
 
 import { LoadingSpinner } from "@components/util/LoadingSpinner";
 import { useAuth } from "@lib/firebase/hooks/useAuth";
@@ -88,7 +88,7 @@ export function AuthWidget() {
             ) : user ? (
                 <UserView />
             ) : (
-                <Link href={`/login?redirect=${encodeURI(router.asPath)}`}>
+                <Link href={`/login?redirect=${encodeURI(router.pathname)}`}>
                     <a className="flex w-10 h-10 text-2xl">
                         <LoginIcon className="m-auto" />
                     </a>

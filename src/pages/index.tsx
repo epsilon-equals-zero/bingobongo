@@ -1,11 +1,13 @@
 import { motion } from "framer-motion";
 import type { NextPage } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 
 import { Button } from "@components/util/Button";
 import withLayout, { WITHOUT_BRANDING } from "@lib/hoc/withLayout";
+import Banner from "@public/banner-optimized.svg";
 
 const IndexPage: NextPage = () => {
     const router = useRouter();
@@ -25,7 +27,7 @@ const IndexPage: NextPage = () => {
             code += "-";
         }
         if (code.length == 5 && code.charAt(4) != "-") {
-            code = code.substr(0, 4) + "-" + code.substr(4);
+            code = code.substring(0, 4) + "-" + code.substring(4);
         }
 
         setBingoCode(code);
@@ -42,20 +44,15 @@ const IndexPage: NextPage = () => {
 
     return (
         <div className="relative flex flex-col flex-1 items-center justify-center">
-            <div className="max-w-xs">
-                <div className="p-4 rounded bg-white text-stone-800">
-                    <h1
-                        className="p-8 px-16 mb-4 font-title text-center text-6xl select-none"
-                        style={{ lineHeight: 0.8 }}
-                    >
-                        bingo
-                        <br />
-                        bongo
-                    </h1>
+            <div className="max-w-sm">
+                <div className="p-4 bg-white text-stone-800 shadow shadow-1">
+                    <div className="p-6 mb-2 select-none">
+                        <Banner />
+                    </div>
                     <motion.input
                         placeholder="Bingo Code"
                         className={
-                            "block border-2 rounded w-full py-2 px-4 mb-2 text-center font-bold outline-none focus:border-stone-500 " +
+                            "block border-2 w-full py-2 px-4 mb-2 text-center font-bold outline-none focus:border-stone-500 " +
                             (hasError ? "border-red-700" : "")
                         }
                         value={bingoCode}
@@ -66,7 +63,7 @@ const IndexPage: NextPage = () => {
                     </Button>
                 </div>
             </div>
-            <p className="pt-4">
+            <p className="mt-6">
                 Or{" "}
                 <Link href="/b/new" passHref>
                     <a className="font-bold">create your own Bingo</a>
