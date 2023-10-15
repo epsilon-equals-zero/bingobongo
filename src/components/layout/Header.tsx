@@ -2,28 +2,28 @@ import getConfig from "next/config";
 import Link from "next/link";
 
 import { AuthWidget } from "@components/auth/AuthWidget";
+import Banner from "@public/banner-optimized.svg";
 
 const { publicRuntimeConfig: config } = getConfig();
 
-export function Header() {
+export interface HeaderProps {
+    branding?: boolean;
+    authWidget?: boolean;
+}
+
+export function Header({ branding = true, authWidget = true }: HeaderProps) {
     return (
-        <header className="grid py-6 px-8" style={{ gridTemplateColumns: "64px 1fr 64px" }}>
-            <div></div>
-            <div className="mx-auto text-center select-none">
-                <Link href="/" passHref>
-                    <a>
-                        <p className="text-2xl font-title leading-5">
-                            bingo
-                            <br />
-                            bongo
-                        </p>
-                        <p className="text-xs opacity-50">v{config?.version}</p>
-                    </a>
-                </Link>
+        <header className="bg-neutral-900 flex items-center h-16 px-4">
+            <div className="ml-0 mr-auto">
+                {branding ? (
+                    <Link href="/" passHref>
+                        <a className="text-white">
+                            <Banner height="50px" width="180px" fill="white" />
+                        </a>
+                    </Link>
+                ) : null}
             </div>
-            <div className="flex flex-row justify-end">
-                <AuthWidget />
-            </div>
+            <div className="ml-auto mr-0">{authWidget ? <AuthWidget /> : null}</div>
         </header>
     );
 }

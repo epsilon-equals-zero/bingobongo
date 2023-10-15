@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import React from "react";
 
-import { LoadingSpinner } from "@components/LoadingSpinner";
+import { LoadingSpinner } from "@components/util/LoadingSpinner";
 import { AuthUser, useAuth } from "@lib/firebase/hooks/useAuth";
 
 export interface AuthPageProps {

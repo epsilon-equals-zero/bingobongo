@@ -11,7 +11,7 @@ export interface FirestorePaginationResult<T = DocumentData> {
     data?: Array<WithRefPart<T>>;
     loading: boolean;
     error?: Error;
-    couldHasMore: boolean;
+    couldHaveMore: boolean;
     more: () => void;
 }
 
@@ -25,14 +25,14 @@ export const useOwnGameCollection = ({ pageSize = 10 } = {}): FirestorePaginatio
         return query(
             collection(db, "games"),
             where("uid", "==", user?.uid || ""),
-            orderBy("updatedAt"),
+            orderBy("updatedAt", "desc"),
             limit(pageSize * pages)
         ).withConverter(gameConverter);
     }, [user, pageSize, pages]);
 
     const [snapshot, loading, error] = useCollection(q);
 
-    const couldHasMore = useMemo(() => {
+    const couldHaveMore = useMemo(() => {
         return snapshot ? snapshot.size == pageSize * pages : false;
     }, [snapshot, pageSize, pages]);
 
@@ -44,7 +44,7 @@ export const useOwnGameCollection = ({ pageSize = 10 } = {}): FirestorePaginatio
     }, [snapshot]);
 
     const more = () => {
-        if (couldHasMore) {
+        if (couldHaveMore) {
             setPages(pages + 1);
         }
     };
@@ -54,7 +54,7 @@ export const useOwnGameCollection = ({ pageSize = 10 } = {}): FirestorePaginatio
         data,
         loading: userLoading || loading,
         error,
-        couldHasMore,
+        couldHaveMore,
         more,
     };
 };

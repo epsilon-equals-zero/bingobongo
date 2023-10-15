@@ -1,8 +1,9 @@
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
 import React from "react";
+import { FcGoogle as GoogleIcon } from "react-icons/fc";
 
-import { LoadingSpinner } from "@components/LoadingSpinner";
+import { LoadingSpinner } from "@components/util/LoadingSpinner";
 import { useAuth } from "@lib/firebase/hooks/useAuth";
 
 const LoginPage: NextPage = () => {
@@ -17,10 +18,10 @@ const LoginPage: NextPage = () => {
 
     return (
         <div className="flex justify-center items-center m-auto">
-            <div className="p-4 rounded bg-white text-stone-800">
+            <div className="p-4 bg-white text-stone-800 shadow-1">
                 <div className="max-w-xs w-screen">
                     <div className="mb-4">
-                        <h4 className="text-center font-bold text-2xl">Log in</h4>
+                        <h4 className="text-xl font-bold py-2 pr-6">Sign in to create and edit your own bingos.</h4>
                         <p className="text-red-500">{error?.message}</p>
                     </div>
 
@@ -32,9 +33,15 @@ const LoginPage: NextPage = () => {
                         </div>
                     ) : (
                         <div>
-                            <button className="p-2 border rounded w-full" onClick={signInWithGooglePopup}>
-                                Google
-                            </button>
+                            <div
+                                className="flex items-center p-2 w-full border-2 cursor-pointer uppercase tracking-wider text-sm font-bold text-neutral-500"
+                                onClick={signInWithGooglePopup}
+                            >
+                                <span className="m-0">
+                                    <GoogleIcon />
+                                </span>
+                                <span className="mx-auto">Continue with Google</span>
+                            </div>
                         </div>
                     )}
                 </div>

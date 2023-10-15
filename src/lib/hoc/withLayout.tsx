@@ -9,6 +9,7 @@ export type PageWithLayout<P = unknown> = NextPage<P> & {
 };
 
 export const DEFAULT_LAYOUT: LayoutKind = ({ children }) => <Layout>{children}</Layout>;
+export const WITHOUT_BRANDING: LayoutKind = ({ children }) => <Layout branding={false}>{children}</Layout>;
 export const NO_LAYOUT: LayoutKind = ({ children }) => <>{children}</>;
 
 export default function withLayout<P>(layout: LayoutKind, page: NextPage<P>): PageWithLayout<P> {
